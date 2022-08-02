@@ -14,11 +14,18 @@ app.get('/weather', (request, response) => {
         let cityData = SearchData(request.query.searchQuery);
         if (cityData) {
             response.send(cityData.data.map((day) => {
-                return {lowTemp: day.low_temp, highTemp: day.high_temp, date: day.date, windDir: day.wind_cdir_full, clouds: day.clouds};
+                return {
+                    lowTemp: day.low_temp,
+                    highTemp: day.high_temp,
+                    date: day.date,
+                    windDir: day.wind_cdir_full,
+                    clouds: day.clouds
+                };
             }));
         }
+    } else {
+        response.send("No data was found for your search");
     }
-    response.send("No data was found for your search");
 });
 
 function SearchData(cityName) {
@@ -28,9 +35,7 @@ function SearchData(cityName) {
             cityData = val;
         }
     });
-    if (cityData) {
-        return cityData
-    }
+    return cityData
 }
 
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
