@@ -26,6 +26,16 @@ Estimate of time needed to complete: 30 minutes
 
 Start time: 1:30 PM
 
-Finish time: _____
+Finish time: 2 PM
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30 minutes
+
+### Feature 2: Serve data to frontend
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2 PM
+
+Finish time: 3:45 PM
+
+Actual time needed to complete: 1 hour 45 minutes
