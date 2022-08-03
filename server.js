@@ -23,10 +23,10 @@ app.get('/weather', (request, response) => {
                 };
             }));
         } else {
-            response.send({error: 'Data not found.'});
+            response.send(null);
         }
     } else {
-        response.send({error: 'Data not found.'});
+        response.send(null);
     }
 });
 
