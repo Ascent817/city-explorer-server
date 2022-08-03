@@ -17,7 +17,7 @@ app.get('/weather', (request, response) => {
                 return {
                     lowTemp: day.low_temp,
                     highTemp: day.high_temp,
-                    date: day.date,
+                    date: day.datetime,
                     windDir: day.wind_cdir_full,
                     clouds: day.clouds
                 };
