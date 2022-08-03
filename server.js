@@ -24,7 +24,7 @@ app.get('/weather', (request, response) => {
             }));
         }
     } else {
-        response.send("No data was found for your search.");
+        response.send({error: 'Data not found.'});
     }
 });
 
