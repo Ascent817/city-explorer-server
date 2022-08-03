@@ -22,9 +22,11 @@ app.get('/weather', (request, response) => {
                     clouds: day.clouds
                 };
             }));
+        } else {
+            response.send({error: 'Data not found.'});
         }
     } else {
-        response.send(JSON.stringify({error: 'Data not found.'}));
+        response.send({error: 'Data not found.'});
     }
 });
 
