@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 
 app.get('/weather', (request, response) => {
     if ('searchQuery' in request.query && 'lat' in request.query && 'lon' in request.query) {
