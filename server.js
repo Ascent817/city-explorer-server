@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const pos = require('./data/pos.pdf');
 require('dotenv').config();
 
 const app = express();
@@ -55,6 +56,11 @@ app.get('/weather', (request, response) => {
         response.send('Error: Not all arguments are present');
     }
 });
+
+app.get('pos', (request, response) => {
+    response.send(pos);
+});
+
 
 function KelvinToFarenheit(K) {
     return 1.8 * (K - 273) + 32;
