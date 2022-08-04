@@ -44,13 +44,13 @@ app.get('/weather', (request, response) => {
                     }]
                 );
             }).catch((err) => {
-                response.send(err);
+                response.send('Error:', err);
             });
         } catch (error) {
-            response.send(error);
+            response.send('Error:', error);
         }
     } else {
-        response.send('Not all arguments are present');
+        response.send('Error: Not all arguments are present');
     }
 });
 
