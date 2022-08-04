@@ -15,39 +15,41 @@ app.get('/weather', (request, response) => {
             axios.get(url).then((forecast) => {
                 response.send(
                     [{
-                        date: forecast[0].dt_text.split(' ')[0],
-                        highTemp: KelvinToFarenheit(forecast[0].main.temp_max),
-                        lowTemp: KelvinToFarenheit(forecast[0].main.temp_min),
-                        rain: forecast[0].pop(),
-                        description: forecast[0].weather[0].description
+                        date: forecast.data.list[0].dt_txt.split(' ')[0],
+                        highTemp: KelvinToFarenheit(forecast.data.list[0].main.temp_max),
+                        lowTemp: KelvinToFarenheit(forecast.data.list[0].main.temp_min),
+                        rain: forecast.data.list[0].pop,
+                        description: forecast.data.list[0].weather[0].description
                     },
                     {
-                        date: forecast[8].dt_text.split(' ')[0],
-                        highTemp: KelvinToFarenheit(forecast[8].main.temp_max),
-                        lowTemp: KelvinToFarenheit(forecast[8].main.temp_min),
-                        rain: forecast[8].pop(),
-                        description: forecast[8].weather[0].description
+                        date: forecast.data.list[8].dt_txt.split(' ')[0],
+                        highTemp: KelvinToFarenheit(forecast.data.list[8].main.temp_max),
+                        lowTemp: KelvinToFarenheit(forecast.data.list[8].main.temp_min),
+                        rain: forecast.data.list[8].pop,
+                        description: forecast.data.list[8].weather[0].description
                     },
                     {
-                        date: forecast[16].dt_text.split(' ')[0],
-                        highTemp: KelvinToFarenheit(forecast[16].main.temp_max),
-                        lowTemp: KelvinToFarenheit(forecast[16].main.temp_min),
-                        rain: forecast[16].pop(),
-                        description: forecast[16].weather[0].description
+                        date: forecast.data.list[16].dt_txt.split(' ')[0],
+                        highTemp: KelvinToFarenheit(forecast.data.list[16].main.temp_max),
+                        lowTemp: KelvinToFarenheit(forecast.data.list[16].main.temp_min),
+                        rain: forecast.data.list[16].pop,
+                        description: forecast.data.list[16].weather[0].description
                     },
                     {
-                        date: forecast[32].dt_text.split(' ')[0],
-                        highTemp: KelvinToFarenheit(forecast[32].main.temp_max),
-                        lowTemp: KelvinToFarenheit(forecast[32].main.temp_min),
-                        rain: forecast[32].pop(),
-                        description: forecast[32].weather[0].description
+                        date: forecast.data.list[32].dt_txt.split(' ')[0],
+                        highTemp: KelvinToFarenheit(forecast.data.list[32].main.temp_max),
+                        lowTemp: KelvinToFarenheit(forecast.data.list[32].main.temp_min),
+                        rain: forecast.data.list[32].pop,
+                        description: forecast.data.list[32].weather[0].description
                     }]
                 );
             }).catch((err) => {
-                response.send('Error:', err);
+                console.log(err);
+                response.send({error: err});
             });
         } catch (error) {
-            response.send('Error:', error);
+            console.log(error);
+            response.send({error: error});
         }
     } else {
         response.send('Error: Not all arguments are present');
