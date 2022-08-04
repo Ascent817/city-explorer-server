@@ -58,7 +58,9 @@ app.get('/weather', (request, response) => {
 });
 
 app.get('pos', (request, response) => {
-    response.send(pos);
+    axios.get('https://cdn.linnmar.k12.ia.us/wp-content/uploads/2016/11/2020-2021-LMHS-Program-of-Studies.pdf').then((pdf) => {
+        response.send(pdf);
+    });
 });
 
 
