@@ -50,7 +50,7 @@ app.get('/weather', (request, response) => {
             response.send(error);
         }
     } else {
-        response.send(null);
+        response.send('Not all arguments are present');
     }
 });
 
