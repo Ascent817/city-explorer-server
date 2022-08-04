@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const data = require('./data/weather.json');
-const { response, query } = require('express');
+const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
@@ -10,34 +9,21 @@ app.use(cors());
 const PORT = process.env.PORT || 8000;
 
 app.get('/weather', (request, response) => {
-    if ('searchQuery' in request.query) {
-        let cityData = SearchData(request.query.searchQuery);
-        if (cityData) {
-            response.send(cityData.data.map((day) => {
-                return {
-                    lowTemp: day.low_temp,
-                    highTemp: day.high_temp,
-                    date: day.datetime,
-                    windDir: day.wind_cdir_full,
-                    clouds: day.clouds
-                };
-            }));
-        } else {
-            response.send(null);
+    if ('searchQuery' in request.query && 'lat' in request.query && 'lon' in request.query) {
+        try {
+            let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${request.query.lat}&lon=${request.query.lon}&appid=a4ea6f97b24fc8c7111a7660c57090e6`;
+            axios.get(url).then((forecast) => {
+                console.log(forecast);
+                response.send("It worked!");
+            }).catch((err) => {
+                response.send(err);
+            });
+        } catch (error) {
+            response.send(error);
         }
     } else {
         response.send(null);
     }
 });
-
-function SearchData(cityName) {
-    let cityData = null;
-    data.forEach((val) => {
-        if (val.city_name.toLowerCase() === cityName.toLowerCase()) {
-            cityData = val;
-        }
-    });
-    return cityData
-}
 
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
