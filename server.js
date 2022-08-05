@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const pos = require('./data/pos.pdf');
 require('dotenv').config();
 
 const app = express();
@@ -56,13 +55,6 @@ app.get('/weather', (request, response) => {
         response.send('Error: Not all arguments are present');
     }
 });
-
-app.get('pos', (request, response) => {
-    axios.get('https://cdn.linnmar.k12.ia.us/wp-content/uploads/2016/11/2020-2021-LMHS-Program-of-Studies.pdf').then((pdf) => {
-        response.send(pdf);
-    });
-});
-
 
 function KelvinToFarenheit(K) {
     return 1.8 * (K - 273) + 32;
