@@ -17,13 +17,9 @@ app.get('/weather', (request, response) => {
             let lat = request.query.lat;
             let lon = request.query.lon;
 
-            if (`${lat}-${lon}` in cache) {
-                if (cache[`${lat}-${lon}`].time === new Date().toDateString()) {
-                    console.log('Used cache');
-                    response.send(cache[`${lat}-${lon}`].data);
-                } else {
-                    delete cache[`${lat}-${lon}`];
-                }
+            if (`${lat}-${lon}` in cache && cache[`${lat}-${lon}`].time === new Date().toDateString()) {
+                console.log('Used cache');
+                response.send(cache[`${lat}-${lon}`].data);
             } else {
                 console.log('Used API')
                 axios.get(url).then((forecast) => {
@@ -62,12 +58,12 @@ app.get('/weather', (request, response) => {
                     response.send(responseData);
                 }).catch((err) => {
                     console.log(err);
-                    response.send({error: err});
+                    response.send({ error: err });
                 });
             }
         } catch (error) {
             console.log(error);
-            response.send({error: error});
+            response.send({ error: error });
         }
     } else {
         response.send('Error: Not all arguments are present');
